@@ -115,6 +115,9 @@ class _PuzzleWidgetState extends State<PuzzleWidget> {
                   ),
                 ];
               }, onSelected: (value) {
+                _timeNotifier.value = 0;
+                timer.cancel();
+                timer = initializeTimer();
                 context
                     .read<PuzzleBloc>()
                     .add(GetPuzzleDataEvent(difficultyLevel: value));
@@ -235,9 +238,8 @@ class _PuzzleWidgetState extends State<PuzzleWidget> {
                       children: [
                         FilledButton(
                           onPressed: () {
-                            _timeNotifier.value = 0;
                             timer.cancel();
-                            timer = initializeTimer();
+                            _timeNotifier.value = 0;
                             context.read<PuzzleBloc>().add(
                                   ResetPuzzleEvent(
                                     difficultyLevel: state.difficultyLevel,
@@ -251,6 +253,9 @@ class _PuzzleWidgetState extends State<PuzzleWidget> {
                         ),
                         FilledButton(
                           onPressed: () {
+                            _timeNotifier.value = 0;
+                            timer.cancel();
+                            timer = initializeTimer();
                             context.read<PuzzleBloc>().add(ShufflePuzzleEvent(
                                 difficultyLevel: state.difficultyLevel));
                           },
